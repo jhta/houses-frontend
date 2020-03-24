@@ -1,0 +1,52 @@
+{
+  "name": "next-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "sart": "next start",
+    "tslint": "tslint -p . -c tslint.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "hoist-non-react-statics": "^3.3.2",
+    "lodash": "^4.17.15",
+    "next": "^9.3.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "rebass": "^4.0.7",
+    "styled-components": "^5.0.1",
+    "styled-system": "^5.1.5"
+  },
+  "devDependencies": {
+    "@types/node": "^13.9.3",
+    "@types/react": "^16.9.25",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "emotion-theming": "^10.0.27",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.1",
+    "prettier": "2.0.2",
+    "standard": "^14.3.3",
+    "tslint": "^6.1.0",
+    "tslint-config-standard": "^9.0.0",
+    "tslint-react-hooks": "^2.2.2",
+    "typescript": "^3.8.3"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "printWidth": 120
+  }
+}
