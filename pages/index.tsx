@@ -1,44 +1,29 @@
 import React from 'react';
 import { asPage } from '../utils';
-import { Box, Flex, Card, Text, Link } from 'rebass';
-
-const Navbar = () => (
-  <Flex px={2} color="black" alignItems="center">
-    <Text p={2} fontWeight="bold">
-      Rebass
-    </Text>
-    <Box mx="auto" />
-    <Link variant="nav" href="#!">
-      Profile
-    </Link>
-  </Flex>
-);
+import { Footer, Header, Banner, HomeSection } from '../components/organisms';
 
 const Home = () => (
   <div>
-    <Navbar />
-    <Flex>
-      <Box width={[1]} color="black" p={[1]} pt={[5]}>
-        <h1>Hello world</h1>
-        <Card width={[1, 1 / 2]} height={320}>
-          this is a card
-        </Card>
-      </Box>
-    </Flex>
-    <style jsx global>{`
-      body {
-        margin: 0;
-      }
-      p {
-        font-size: 20px;
-      }
-    `}</style>
+    <Header />
+    <Banner />
+    <HomeSection
+      title="Como funciona?"
+      description="Pariatur nulla exercitation et sint cupidatat fugiat enim ea quis. Eiusmod elit mollit sit amet excepteuraliqua velit esse d fugiat enim ea quis. Eiusmod elit mollit sit amet excepteuraliqua velit esse do aliquip dolore magna occaecat nulla nulla. Consequat pariatur eiusmod minim ut ex."
+      imgSrc="/images/img-funciona.png"
+    />
+    <HomeSection
+      title="Como funciona?"
+      description="Pariatur nulla exercitation et sint cupidatat fugiat enim ea quis. Eiusmod elit mollit sit amet excepteuraliqua velit esse d fugiat enim ea quis. Eiusmod elit mollit sit amet excepteuraliqua velit esse do aliquip dolore magna occaecat nulla nulla. Consequat pariatur eiusmod minim ut ex."
+      imgSrc="/images/img-ayuda.png"
+      invert
+    />
+    <Footer />
   </div>
 );
 
-Home.getInitialProps = async ({ req }) => {
-  const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
-  return { userAgent };
-};
+// Home.getInitialProps = async ({ req }) => {
+//   const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
+//   return { userAgent };
+// };
 
 export default asPage(Home);

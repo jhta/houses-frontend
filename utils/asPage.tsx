@@ -1,15 +1,10 @@
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import { ThemeProvider } from 'emotion-theming';
-import defaultTheme from '../theme';
 
 export const asPage = (Component) => {
-  const AsPage = ({ theme = defaultTheme, ...rest }) => {
-    return (
-      <ThemeProvider theme={theme}>
-        <Component {...rest} />
-      </ThemeProvider>
-    );
+  const AsPage = ({ theme = {}, ...rest }) => {
+    return <Component {...rest} />;
   };
 
   hoistNonReactStatics(AsPage, Component);
