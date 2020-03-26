@@ -19,7 +19,7 @@ module.exports = {
       current: 'currentColor',
       black: '#000',
       white: '#fff',
-      principal: '#54B6FF',
+      primary: '#54B6FF',
       secondary: '#0074CB',
       third: '#A1D6FF',
       textColor: '#5F5F5F',
@@ -608,5 +608,5 @@ module.exports = {
     transitionDelay: ['responsive'],
   },
   corePlugins: {},
-  plugins: [],
+  plugins: [require('@tailwindcss/custom-forms')],
 };

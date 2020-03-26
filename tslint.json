@@ -4,6 +4,11 @@
     "tslint-react-hooks"
   ],
   "rules": {
+    "indent": [
+      true,
+      "spaces",
+      2
+    ],
     "import-name": false,
     "align": false,
     "function-name": [

@@ -7,5 +7,5 @@ body {
 }
 
 p {
-  @apply text-textColor text-xs;
+  @apply text-textColor text-base;
 }

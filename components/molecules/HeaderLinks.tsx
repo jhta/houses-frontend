@@ -12,7 +12,7 @@ export const HeaderLinks = () => (
   <React.Fragment>
     <Column>
       <div className="hidden sm:inline-block py-4">
-        <HeaderLink href="/">Agregar anuncio</HeaderLink>
+        <HeaderLink href="/stay/add">Agregar anuncio</HeaderLink>
         <HeaderLink href="/">Anfitrion</HeaderLink>
         <HeaderLink href="/">Mis Solicitudes</HeaderLink>
         <HeaderLink href="/">Inicia sesion</HeaderLink>
