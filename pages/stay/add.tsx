@@ -89,7 +89,7 @@ const AddStayForm = () => (
         <H2>Qué tipo de alojamiento ofreces?</H2>
       </Column>
     </Row>
-    <Row className="flex-wrap mb-6">
+    <Row className="flex-wrap ">
       <Column className="w-full md:w-auto md:pr-8">
         <FormSelect
           options={['apartamento', 'casa', 'habitacion', 'sofa cama']}
