@@ -1,6 +1,6 @@
 import React from 'react';
 import { asPage } from '../utils';
-import { Footer, Header, Banner, HomeSection } from '../components/organisms';
+import { Banner, HomeSection } from '../components/organisms';
 import { Layout } from '../components/layout';
 
 const Home = () => (

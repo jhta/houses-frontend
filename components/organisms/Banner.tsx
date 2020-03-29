@@ -20,7 +20,7 @@ export const Banner = () => (
         </Column>
       </Row>
       <Row className="flex-wrap justify-center">
-        <a className="cursor-pointer" href="/FormPage/FormPage">
+        <a className="cursor-pointer" href="/session/login">
           <Column className="w-full md:w-auto md:pr-8 mb-6 items-center">
             <BannerCard
               imgSrc="/images/img-hospedar.png"
@@ -32,7 +32,7 @@ export const Banner = () => (
         <Column className="w-full md:w-auto items-center">
           <BannerCard
             imgSrc="/images/img-buscar.png"
-            title="Hospedar"
+            title="Buscar Hospedaje"
             description="Pariatur nulla exercitation et sint cupidatat fugiat enim ea quis"
           />
         </Column>
