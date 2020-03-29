@@ -20,13 +20,15 @@ export const Banner = () => (
         </Column>
       </Row>
       <Row className="flex-wrap justify-center">
-        <Column className="w-full md:w-auto md:pr-8 mb-6 items-center">
-          <BannerCard
-            imgSrc="/images/img-hospedar.png"
-            title="Hospedar"
-            description="Pariatur nulla exercitation et sint cupidatat fugiat enim ea quis"
-          />
-        </Column>
+        <a className="cursor-pointer" href="/FormPage/FormPage">
+          <Column className="w-full md:w-auto md:pr-8 mb-6 items-center">
+            <BannerCard
+              imgSrc="/images/img-hospedar.png"
+              title="Hospedar"
+              description="Pariatur nulla exercitation et sint cupidatat fugiat enim ea quis"
+            />
+          </Column>
+        </a>
         <Column className="w-full md:w-auto items-center">
           <BannerCard
             imgSrc="/images/img-buscar.png"

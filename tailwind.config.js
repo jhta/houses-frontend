@@ -22,7 +22,9 @@ module.exports = {
       primary: '#54B6FF',
       secondary: '#0074CB',
       third: '#A1D6FF',
+      fourth: '#CAEBFE',
       textColor: '#5F5F5F',
+      requiredColor: 'red',
       titleColor: '#436680',
       gray: {
         1: '#506C80',
