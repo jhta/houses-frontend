@@ -14,8 +14,8 @@
         "alias": {
           "@pages": "/pages",
           "@theme/*": "./theme/*",
-          "@components": "./components",
-          "@services": "./services",
+          "@components": "./components/*",
+          "@services": "./services/*",
           "@config": "./config"
         }
       }

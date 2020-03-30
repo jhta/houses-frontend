@@ -1,7 +1,9 @@
 import classnames from 'classnames';
+import Router from 'next/router';
 
 export const FormHeader = (props) => {
-  const { centerTitle, rightTitle, leftTitle, srcImg, isCurrentForm, setIsCurrentForm } = props;
+  const { centerTitle, rightTitle, leftTitle, srcImg, currentForm, setIsCurrentForm } = props;
+  const isRegister = currentForm === 'register';
   return (
     <div className="flex justify-center items-center text-center">
       <div className="text-center">
@@ -11,15 +13,15 @@ export const FormHeader = (props) => {
           <button
             className={classnames(
               'outline-none',
-              { 'text-white font-bold text-2xl mx-2': isCurrentForm },
+              { 'text-white font-bold text-2xl mx-2': isRegister },
               {
-                'flex text-secondary mx-2 w-20 justify-center items-center bg-fourth rounded-full h-8 my-2 mx-2': !isCurrentForm,
+                'flex text-secondary mx-2 w-20 justify-center items-center bg-fourth rounded-full h-8 my-2 mx-2': !isRegister,
               }
             )}
-            disabled={isCurrentForm}
+            disabled={isRegister}
             onClick={(e) => {
               e.preventDefault();
-              setIsCurrentForm(!isCurrentForm);
+              Router.push('/session/register');
             }}
           >
             <label className="cursor-pointer">{leftTitle}</label>
@@ -28,15 +30,15 @@ export const FormHeader = (props) => {
           <button
             className={classnames(
               'outline-none',
-              { 'text-white font-bold text-2xl mx-2': !isCurrentForm },
+              { 'text-white font-bold text-2xl mx-2': !isRegister },
               {
-                'flex text-secondary mx-2 w-24 justify-center items-center bg-fourth rounded-full h-8 my-2 mx-2': isCurrentForm,
+                'flex text-secondary mx-2 w-24 justify-center items-center bg-fourth rounded-full h-8 my-2 mx-2': isRegister,
               }
             )}
-            disabled={!isCurrentForm}
+            disabled={!isRegister}
             onClick={(e) => {
               e.preventDefault();
-              setIsCurrentForm(!isCurrentForm);
+              Router.push('/session/login');
             }}
           >
             <label className="cursor-pointer">{rightTitle}</label>

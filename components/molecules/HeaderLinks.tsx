@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react';
-import { Box, Flex, Card, Text } from 'rebass';
+import React from 'react';
 import A from '../atoms/Link';
 import { Column } from '../grid';
 
-import { login } from '../../services/oauth';
-
 const HeaderLink = ({ children, href, ...rest }) => (
-  <A lassName="ml-4" href={href} {...rest}>
+  <A className="ml-4" href={href} {...rest}>
     {children}
   </A>
 );
@@ -18,14 +15,7 @@ export const HeaderLinks = () => (
         <HeaderLink href="/stay/add">Agregar anuncio</HeaderLink>
         <HeaderLink href="/">Anfitrion</HeaderLink>
         <HeaderLink href="/">Mis Solicitudes</HeaderLink>
-        <HeaderLink href="/">Inicia sesion</HeaderLink>
-        <div
-          onClick={async () => {
-            await login({ password: '123456', username: 'test@test.com' });
-          }}
-        >
-          this is an example
-        </div>
+        <HeaderLink href="/session/login">Inicia sesion</HeaderLink>
       </div>
     </Column>
   </React.Fragment>

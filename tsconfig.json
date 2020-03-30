@@ -16,7 +16,7 @@
   },
   "exclude": ["node_modules"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "baseUrl": ".",
+  "baseUrl": "./",
   "paths": {
     "@pages/*": ["./pages/*"],
     "@theme/*": ["./theme/*"],

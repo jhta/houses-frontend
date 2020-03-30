@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import { get } from 'lodash';
 import qs from 'qs';
 import cookies from 'js-cookie';
 import { API_URL } from '../constants';
@@ -42,12 +43,11 @@ export async function login(params: LoginParams): Promise<LoginResponse> {
 
   try {
     const { data } = await axios(options);
-    const { access_token: token, expires_in } = data;
-    cookies.set('token', token);
-
+    const { access_token: token, expires_in: expires } = data;
+    cookies.set('token', token, { expires });
     return { data: { ok: true }, error: {} };
   } catch (error) {
-    console.log(error);
-    return { error, data: { ok: false } };
+    const desc = get(error, 'response.data.error_description', 'server error');
+    return { error: desc, data: { ok: false } };
   }
 }
