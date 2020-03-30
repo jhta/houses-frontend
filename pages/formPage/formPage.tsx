@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FormHeader } from '../../components/organisms/FormHeader';
 import { LodgingForm } from '../../components/organisms/LodgingForm';
-import { RegisterForm } from '../../components/organisms/RegisterForm';
+import { LoginForm } from '../../components/organisms/LoginForm';
 
 const BackButton = (props) => {
   const { href, children, className } = props;
@@ -31,7 +31,7 @@ const FormPage = () => {
         isCurrentForm={isCurrentForm}
         setIsCurrentForm={setIsCurrentForm}
       />
-      {isCurrentForm ? <LodgingForm /> : <RegisterForm />}
+      {isCurrentForm ? <LodgingForm /> : <LoginForm />}
     </div>
   );
 };

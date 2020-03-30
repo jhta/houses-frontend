@@ -1,0 +1,80 @@
+export default [
+  {
+    key: 101,
+    lodgingInfo: {
+      name: 'Altos del bosque',
+      lodging: 'Cuarto',
+      Rooms: '2',
+      food: 'no ofrece - nevera',
+      access: 'Estacionamiento',
+    },
+    type: 'Point',
+    coord: { latitude: 4.642643008918552, longitude: -74.07360076904298 },
+  },
+  {
+    key: 102,
+    lodgingInfo: {
+      name: 'Casa Margarita',
+      lodging: 'Sofacama',
+      Rooms: '1',
+      food: 'snacks',
+      access: 'Estacionamiento',
+    },
+    type: 'Point',
+    coord: { latitude: 4.64580831742739, longitude: -74.13196563720705 },
+  },
+  {
+    key: 103,
+    lodgingInfo: {
+      name: 'Apartamento Tayrona',
+      lodging: 'Habitación',
+      Rooms: '1',
+      food: 'cena',
+      access: 'Estacionamiento',
+    },
+    type: 'Point',
+    coord: { latitude: 4.6273295592893735, longitude: -74.15316581726076 },
+  },
+  {
+    key: 104,
+    lodgingInfo: {
+      name: 'Casa verano',
+      lodging: 'primer piso',
+      Rooms: '1',
+      food: 'nevera',
+      access: 'Estacionamiento',
+    },
+    type: 'Point',
+    coord: { latitude: 4.676348535659988, longitude: -74.14518356323244 },
+  },
+  {
+    key: 105,
+    lodgingInfo: {
+      name: 'Casa quinta',
+      lodging: 'Sofacama',
+      Rooms: '1',
+      food: 'snacks',
+      access: 'Estacionamiento',
+    },
+    type: 'Point',
+    coord: { latitude: 4.672071274158901, longitude: -74.08407211303712 },
+  },
+  {
+    key: 106,
+    lodgingInfo: { name: 'Apartaestudio', lodging: 'Sofacama', Rooms: '1', food: 'cena', access: 'Estacionamiento' },
+    type: 'Point',
+    coord: { latitude: 4.6067114867279955, longitude: -74.1105079650879 },
+  },
+  {
+    key: 107,
+    lodgingInfo: {
+      name: 'Casa primavera',
+      lodging: 'Hamaca Mariana',
+      Rooms: '1',
+      food: 'cena y desayuno',
+      access: 'Estacionamiento',
+    },
+    type: 'Point',
+    coord: { latitude: 4.6273295592897755, longitude: -74.1531658172609 },
+  },
+];

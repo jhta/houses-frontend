@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { string, object } from 'yup';
-import { FormInput } from '../molecules';
+import { FormInput } from '../molecules/FormInput';
 
 const FormButton = (props) => {
   const { children } = props;
@@ -14,7 +14,7 @@ const FormButton = (props) => {
   );
 };
 
-export const RegisterForm = (props) => {
+export const LoginForm = (props) => {
   const validationSchema = object().shape({
     correo: string().email('correo inválido').required('* El correo es requerido'),
     contrasena: string().required('* La contraseña es requerida'),
