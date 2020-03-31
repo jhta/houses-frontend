@@ -45,19 +45,19 @@ export interface IPlacesResponse extends RequestResponse {
   };
 }
 
-export async function getPlaces(params: PlacesParams): Promise<IPlacesResponse> {
+export async function getPlaces(params: PlacesParams, navigation): Promise<IPlacesResponse> {
   const formattedParams = qs.stringify(params);
   const token = cookies.get('token') || '';
 
   const options: AxiosRequestConfig = {
     method: 'GET',
     url: `${Endpoint.places}?${formattedParams}`,
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${navigation}` },
   };
 
   try {
     const { data } = await createAxios()(options);
-    console.log(data);
+    // console.log(data);
     const { results: places } = data;
     return { data: { places }, error: {} };
   } catch (error) {

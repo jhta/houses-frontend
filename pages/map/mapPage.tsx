@@ -7,19 +7,19 @@ import { MarketWindow } from '../../components/molecules/MarketWindow';
 import mockMark from '../../helpers/mockMarkers';
 import { getPlaces, IPlacesResponse } from '../../services/apis/places';
 
-const fetchPlacesByLocation = async (location = 1, setPlaces) => {
-  try {
-    const { data, error }: IPlacesResponse = await getPlaces({ LocationId: 1 });
-    if (error) throw error;
-    console.log('data', data);
-    setPlaces(data.places);
-  } catch (error) {
-    console.log(error);
-  }
-};
-const MapPage = () => {
+// const fetchPlacesByLocation = async (location = 1, setPlaces) => {
+//   try {
+//     const { data, error }: IPlacesResponse = await getPlaces({ LocationId: 1 });
+//     if (error) throw error;
+//     console.log('data', data);
+//     setPlaces(data.places);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+const MapPage = ({ places }) => {
+  console.log('those are places from the API', places);
   const token = getKey.MPBX_key;
-  const [places, setPlaces] = useState([]);
   const [selectedMarker, setSelectedMarket] = useState(null);
   const [viewport, setViewport] = useState({
     width: '100%',
@@ -39,7 +39,7 @@ const MapPage = () => {
   }, []);
 
   useEffect(() => {
-    fetchPlacesByLocation(1, setPlaces);
+    // fetchPlacesByLocation(1, setPlaces);
   });
 
   const handleClick = (marker) => {
@@ -110,23 +110,22 @@ function getTokenFromRequest(req) {
   return cookies['token'];
 }
 
-// MapPage.getInitialProps = async ({ req, res }) => {
-//   const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
-//   let places = [];
-//   try {
-//     let authorization = '';
-//     if (typeof req !== 'undefined') {
-//       console.log(parseCookies(req));
-//       authorization = getTokenFromRequest(req);
-//     }
-//     const { data, error }: IPlacesResponse = await getPlaces({ LocationId: 1 }, authorization);
-//     if (error) throw error;
-//     console.log('data', data);
-//     places = data.places;
-//   } catch (error) {
-//     console.log(error);
-//   }
-//   return { userAgent, places };
-// };
+MapPage.getInitialProps = async ({ req, res }) => {
+  const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
+  let places = [];
+  try {
+    let authorization = '';
+    if (typeof req !== 'undefined') {
+      console.log(parseCookies(req));
+      authorization = getTokenFromRequest(req);
+    }
+    const { data, error }: IPlacesResponse = await getPlaces({ LocationId: 1 }, authorization);
+    console.log('places in component', data);
+    places = data.places;
+  } catch (error) {
+    console.log(error);
+  }
+  return { userAgent, places };
+};
 
 export default MapPage;
