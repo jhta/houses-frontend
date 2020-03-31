@@ -1,0 +1,125 @@
+import axios, { AxiosRequestConfig } from 'axios';
+import { get } from 'lodash';
+import qs from 'qs';
+import { API_URL } from '../constants';
+import { RequestResponse } from '../interfaces';
+import { Endpoint } from '../enums';
+import createAxios from '../axios';
+import cookies from 'js-cookie';
+
+export interface PlacesParams {
+  LocationId: number;
+  OrderBy?: string;
+  Page?: number;
+  PageSize?: number;
+  MaxPageSize?: number;
+  CountGuess?: number;
+}
+export interface IPlace {
+  id?: number;
+  latitude: number;
+  longitude: number;
+  address?: string;
+  phone: number;
+  description?: string;
+  kitchen?: boolean;
+  guestAllowed: number;
+  food?: boolean;
+  parking?: boolean;
+  bathroom?: boolean;
+  availableFrom?: string;
+  availableTo?: string;
+  internet?: boolean;
+  active?: boolean;
+  // "active": true,
+  // "creationDate": "2020/03/26 22:21:51",
+  // "internet": false,
+  // "entireHouse": false,
+  // "user": null,
+  // "location": null
+}
+
+export interface IPlacesResponse extends RequestResponse {
+  data: {
+    places: IPlace[];
+  };
+}
+
+export async function getPlaces(params: PlacesParams): Promise<IPlacesResponse> {
+  const formattedParams = qs.stringify(params);
+  const token = cookies.get('token') || '';
+
+  const options: AxiosRequestConfig = {
+    method: 'GET',
+    url: `${Endpoint.places}?${formattedParams}`,
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  try {
+    const { data } = await createAxios()(options);
+    console.log(data);
+    const { results: places } = data;
+    return { data: { places }, error: {} };
+  } catch (error) {
+    console.log('error----------', error);
+    const desc = get(error, 'response.data.error_description', 'server error');
+    return { error: desc, data: { places: [] } };
+  }
+}
+
+interface PostParams extends IPlace {
+  location: {
+    id: number;
+  };
+  user: {
+    location: {
+      id: number;
+    };
+  };
+}
+
+interface PostPlaceResponse extends RequestResponse {
+  data: {
+    id: number;
+  };
+}
+
+export async function postPlace(params: PostParams): Promise<PostPlaceResponse> {
+  const options: AxiosRequestConfig = {
+    method: 'POST',
+    url: `${Endpoint.Locations}`,
+    baseURL: API_URL,
+    data: params,
+  };
+
+  try {
+    const { data } = await axios(options);
+    console.log(data);
+    const { id } = data;
+    return { data: { id }, error: {} };
+  } catch (error) {
+    const desc = get(error, 'response.data.error_description', 'server error');
+    return { error: desc, data: { id: -1 } };
+  }
+}
+
+interface GetPlaceResponse extends RequestResponse {
+  data: IPlace | {};
+}
+
+export async function getPlaceById({ id }): Promise<GetPlaceResponse> {
+  const options: AxiosRequestConfig = {
+    method: 'GET',
+    url: `${Endpoint.Locations}/${id}`,
+    baseURL: API_URL,
+  };
+
+  try {
+    const { data } = await axios(options);
+    console.log(data);
+    return { data, error: {} };
+  } catch (error) {
+    const desc = get(error, 'response.data.error_description', 'server error');
+    return { error: desc, data: {} };
+  }
+}
