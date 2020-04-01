@@ -4,7 +4,8 @@ import qs from 'qs';
 import { API_URL } from '../constants';
 import { RequestResponse } from '../interfaces';
 import { Endpoint } from '../enums';
-import createAxios from '../axios';
+// improve axios conf later
+import localAxios from '../axios';
 import cookies from 'js-cookie';
 
 export interface PlacesParams {
@@ -45,6 +46,7 @@ export interface IPlacesResponse extends RequestResponse {
   };
 }
 
+// TODO: Improve the authorization config
 export async function getPlaces(params: PlacesParams, navigation): Promise<IPlacesResponse> {
   const formattedParams = qs.stringify(params);
   const token = cookies.get('token') || '';
@@ -56,12 +58,12 @@ export async function getPlaces(params: PlacesParams, navigation): Promise<IPlac
   };
 
   try {
-    const { data } = await createAxios()(options);
+    const { data } = await localAxios(options);
     // console.log(data);
     const { results: places } = data;
     return { data: { places }, error: {} };
   } catch (error) {
-    console.log('error----------', error);
+    console.log('error', error);
     const desc = get(error, 'response.data.error_description', 'server error');
     return { error: desc, data: { places: [] } };
   }
@@ -87,7 +89,7 @@ interface PostPlaceResponse extends RequestResponse {
 export async function postPlace(params: PostParams): Promise<PostPlaceResponse> {
   const options: AxiosRequestConfig = {
     method: 'POST',
-    url: `${Endpoint.Locations}`,
+    url: `${Endpoint.places}`,
     baseURL: API_URL,
     data: params,
   };
@@ -103,22 +105,23 @@ export async function postPlace(params: PostParams): Promise<PostPlaceResponse> 
   }
 }
 
-interface GetPlaceResponse extends RequestResponse {
+export interface IGetPlaceResponse extends RequestResponse {
   data: IPlace | {};
 }
 
-export async function getPlaceById({ id }): Promise<GetPlaceResponse> {
+export async function getPlaceById({ id }, authorization): Promise<IGetPlaceResponse> {
   const options: AxiosRequestConfig = {
     method: 'GET',
-    url: `${Endpoint.Locations}/${id}`,
-    baseURL: API_URL,
+    url: `${Endpoint.places}/${id}`,
+    headers: { Authorization: `Bearer ${authorization}` },
   };
 
   try {
-    const { data } = await axios(options);
+    const { data } = await localAxios(options);
     console.log(data);
     return { data, error: {} };
   } catch (error) {
+    console.log('server -error ----', error);
     const desc = get(error, 'response.data.error_description', 'server error');
     return { error: desc, data: {} };
   }

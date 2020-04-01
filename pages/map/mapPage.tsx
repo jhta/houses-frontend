@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import ReactMapGL from 'react-map-gl';
+import { isEmpty } from 'lodash';
 import { Layout } from '../../components/layout';
 import { getKey } from '../../config/confg';
 import { MarkerItem } from '../../components/molecules/MarkerItem';
 import { MarketWindow } from '../../components/molecules/MarketWindow';
 import mockMark from '../../helpers/mockMarkers';
 import { getPlaces, IPlacesResponse } from '../../services/apis/places';
+import { getTokenFromRequest } from '../../utils/getCookie';
 
-// const fetchPlacesByLocation = async (location = 1, setPlaces) => {
-//   try {
-//     const { data, error }: IPlacesResponse = await getPlaces({ LocationId: 1 });
-//     if (error) throw error;
-//     console.log('data', data);
-//     setPlaces(data.places);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 const MapPage = ({ places }) => {
+  console.log('maybe you will have problems with cors in login, try to install some browser extension meanwhile');
+  console.log('you can delete all the console logs after read the alert and the logs :D ');
   console.log('those are places from the API', places);
   const token = getKey.MPBX_key;
   const [selectedMarker, setSelectedMarket] = useState(null);
@@ -29,6 +23,9 @@ const MapPage = ({ places }) => {
     zoom: 12,
   });
   useEffect(() => {
+    alert(
+      'to get the data fromn the API, please login before: test@test.com pass:123456, I will implement restrited pages by session later'
+    );
     if (!navigator.geolocation) {
       return;
     } else {
@@ -37,10 +34,6 @@ const MapPage = ({ places }) => {
       });
     }
   }, []);
-
-  useEffect(() => {
-    // fetchPlacesByLocation(1, setPlaces);
-  });
 
   const handleClick = (marker) => {
     setSelectedMarket(marker);
@@ -92,37 +85,23 @@ const MapPage = ({ places }) => {
   );
 };
 
-function parseCookies(request) {
-  var list = {},
-    rc = request.headers.cookie;
-
-  rc &&
-    rc.split(';').forEach(function (cookie) {
-      var parts = cookie.split('=');
-      list[parts.shift().trim()] = decodeURI(parts.join('='));
-    });
-
-  return list;
-}
-
-function getTokenFromRequest(req) {
-  const cookies = parseCookies(req);
-  return cookies['token'];
-}
-
-MapPage.getInitialProps = async ({ req, res }) => {
+MapPage.getInitialProps = async ({ req }) => {
   const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
   let places = [];
   try {
+    // TODO: improve auth token config and add it to a global decorator
     let authorization = '';
     if (typeof req !== 'undefined') {
-      console.log(parseCookies(req));
       authorization = getTokenFromRequest(req);
     }
     const { data, error }: IPlacesResponse = await getPlaces({ LocationId: 1 }, authorization);
-    console.log('places in component', data);
     places = data.places;
+    if (!isEmpty(error)) {
+      // TODO: handle errors
+      console.log('error', error);
+    }
   } catch (error) {
+    // TODO: handle errors
     console.log(error);
   }
   return { userAgent, places };
