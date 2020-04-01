@@ -3,12 +3,10 @@ import { get } from 'lodash';
 import qs from 'qs';
 import cookies from 'js-cookie';
 import { API_URL } from '../constants';
+import { RequestResponse } from '../interfaces';
+import { Endpoint } from '../enums';
 
-const isBrowser = typeof window !== 'undefined';
-
-enum Endpoint {
-  'Login' = '/auth',
-}
+// const isBrowser = typeof window !== 'undefined';
 
 const ENCODED_FORM_HEADERS = {
   'Content-Type': 'application/x-www-form-urlencoded',
@@ -17,11 +15,6 @@ const ENCODED_FORM_HEADERS = {
 interface LoginParams {
   readonly password: string;
   readonly username: string;
-}
-
-interface RequestResponse {
-  error: any;
-  data: any;
 }
 
 interface LoginResponse extends RequestResponse {

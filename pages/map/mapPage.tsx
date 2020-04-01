@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import ReactMapGL from 'react-map-gl';
+import { isEmpty } from 'lodash';
 import { Layout } from '../../components/layout';
 import { getKey } from '../../config/confg';
 import { MarkerItem } from '../../components/molecules/MarkerItem';
 import { MarketWindow } from '../../components/molecules/MarketWindow';
 import mockMark from '../../helpers/mockMarkers';
+import { getPlaces, IPlacesResponse } from '../../services/apis/places';
+import { getTokenFromRequest } from '../../utils/getCookie';
 
-const MapPage = () => {
+const MapPage = ({ places }) => {
+  console.log('maybe you will have problems with cors in login, try to install some browser extension meanwhile');
+  console.log('you can delete all the console logs after read the alert and the logs :D ');
+  console.log('those are places from the API', places);
   const token = getKey.MPBX_key;
   const [selectedMarker, setSelectedMarket] = useState(null);
   const [viewport, setViewport] = useState({
@@ -17,6 +23,9 @@ const MapPage = () => {
     zoom: 12,
   });
   useEffect(() => {
+    alert(
+      'to get the data fromn the API, please login before: test@test.com pass:123456, I will implement restrited pages by session later'
+    );
     if (!navigator.geolocation) {
       return;
     } else {
@@ -74,6 +83,28 @@ const MapPage = () => {
       </ReactMapGL>
     </Layout>
   );
+};
+
+MapPage.getInitialProps = async ({ req }) => {
+  const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
+  let places = [];
+  try {
+    // TODO: improve auth token config and add it to a global decorator
+    let authorization = '';
+    if (typeof req !== 'undefined') {
+      authorization = getTokenFromRequest(req);
+    }
+    const { data, error }: IPlacesResponse = await getPlaces({ LocationId: 1 }, authorization);
+    places = data.places;
+    if (!isEmpty(error)) {
+      // TODO: handle errors
+      console.log('error', error);
+    }
+  } catch (error) {
+    // TODO: handle errors
+    console.log(error);
+  }
+  return { userAgent, places };
 };
 
 export default MapPage;
