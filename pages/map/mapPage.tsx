@@ -3,6 +3,7 @@ import ReactMapGL from 'react-map-gl';
 import { isEmpty } from 'lodash';
 import { Layout } from '../../components/layout';
 import { getKey } from '../../config/confg';
+import { ToggleSwitch } from '../../components/atoms/ToggleSwitch';
 import { MarkerItem } from '../../components/molecules/MarkerItem';
 import { MarketWindow } from '../../components/molecules/MarketWindow';
 import mockMark from '../../helpers/mockMarkers';
@@ -15,6 +16,8 @@ const MapPage = ({ places }) => {
   console.log('those are places from the API', places);
   const token = getKey.MPBX_key;
   const [selectedMarker, setSelectedMarket] = useState(null);
+  const [isViajero, setIsViajero] = useState(false);
+  const [isMedico, setIsMedico] = useState(false);
   const [viewport, setViewport] = useState({
     width: '100%',
     height: '100%',
@@ -48,9 +51,30 @@ const MapPage = ({ places }) => {
         mapboxApiAccessToken={token}
         mapStyle="mapbox://styles/ivangarcia/ck8dim0x200s81iqp9qjtric3"
       >
-        <div className="absolute mx-4 opacity-75 right-0 left-0 top-0 z-10 mt-4 bg-white h-12">
+        <div className="absolute mx-32 opacity-75 right-0 left-0 top-0 z-10 mt-4 bg-white h-24 px-10">
           <div className="p-2 font-bold">
             <label>Fijar alojamiento</label>
+            <div className="flex justify-between pt-2">
+              <div>
+                <button className="border-solid border rounded-full h-8 w-24 text-center">Fechas</button>
+              </div>
+              <div>
+                <button className="border-solid border rounded-full h-8 w-40 text-center">Tipo de espacio</button>
+              </div>
+              <div>
+                <ToggleSwitch isChecked={isViajero} onChange={() => setIsViajero(!isViajero)}>
+                  Soy Viajer@
+                </ToggleSwitch>
+              </div>
+              <div>
+                <ToggleSwitch isChecked={isMedico} onChange={() => setIsMedico(!isMedico)}>
+                  Soy medic@/enfermer@
+                </ToggleSwitch>
+              </div>
+              <div>
+                <button className="border-solid border rounded h-8 w-32 text-center">Filtrar</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -70,9 +94,7 @@ const MapPage = ({ places }) => {
           ))}
         {selectedMarker && (
           <MarketWindow
-            longitude={selectedMarker.coord.longitude}
-            latitude={selectedMarker.coord.latitude}
-            lodgingInfo={selectedMarker.lodgingInfo}
+            marker={selectedMarker}
             closeOnClick={false}
             onClose={() => {
               setSelectedMarket(null);

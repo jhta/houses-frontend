@@ -4,3 +4,4 @@ export * from './FormDropdown';
 export * from './FormInput';
 export * from './MarketWindow';
 export * from './MarkerItem';
+export * from './FormTextArea';

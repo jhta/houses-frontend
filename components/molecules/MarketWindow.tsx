@@ -1,9 +1,10 @@
 import { Popup } from 'react-map-gl';
 
 export const MarketWindow = (props) => {
-  const { longitude, latitude, lodgingInfo } = props;
+  console.log('props', props);
+  const { marker } = props;
   return (
-    <Popup {...props} longitude={longitude} latitude={latitude}>
+    <Popup {...props} longitude={marker.coord.longitude} latitude={marker.coord.latitude}>
       <div className="flex-grow w-64">
         <div className="pt-4 m-0">
           <img
@@ -13,23 +14,26 @@ export const MarketWindow = (props) => {
         </div>
 
         <div className="pt-2">
-          <h1>{lodgingInfo.name}</h1>
+          <h1>{marker.lodgingInfo.name}</h1>
           <div>
             <p className="text-xs">
               <strong className="text-primary">Hospedaje en: </strong>
-              {lodgingInfo.lodging}
+              {marker.lodgingInfo.lodging}
             </p>
             <p className="text-xs">
               <strong className="text-primary">Con acceso a: </strong>
-              {lodgingInfo.access}
+              {marker.lodgingInfo.access}
             </p>
             <p className="text-xs">
               <strong className="text-primary">Alimentación: </strong>
-              {lodgingInfo.food}
+              {marker.lodgingInfo.food}
             </p>
           </div>
           <div className="flex justify-end py-2">
-            <a className="bg-primary w-24 rounded py-1 justify-center text-center text-white h-8" href="#">
+            <a
+              className="bg-primary w-24 rounded py-1 justify-center text-center text-white h-8"
+              href={`/stay/request?id=${marker.key || `0`}`}
+            >
               Solicitar
             </a>
           </div>
