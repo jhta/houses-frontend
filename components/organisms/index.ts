@@ -5,3 +5,4 @@ export * from './Footer';
 export * from './FormHeader';
 export * from './RegisterForm';
 export * from './LoginForm';
+export * from './RequestForm';
