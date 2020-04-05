@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import ReactMapGL, { GeolocateControl } from 'react-map-gl';
 import classnames from 'classnames';
 import { Layout } from '../../components/layout';
-import { H1, H2, Select, RadioBox } from '../../components/atoms';
+import { H1, H2, Select, RadioBox, CheckBox } from '../../components/atoms';
 import { Container, Column, Row } from '../../components/grid';
+import { FormBottom, FormInput } from '../../components/molecules';
+import { getKey } from '../../config/confg';
 
+const token = getKey.MPBX_key;
 // const AddStayTitle = () => ()
 
 const Step = ({ children, isActive = false }) => (
   <div
     className={classnames(
-      'py-1 px-12 rounded-full mr-6 text-2xl',
+      'py-1 px-10 rounded-full mr-6 text-2xl',
       { 'bg-primary text-white': isActive },
       { 'bg-gray-6 text-gray-2': !isActive }
     )}
@@ -81,8 +85,105 @@ const FormRadioBoxList = ({ options = [], label = '' }) => (
     ))}
   </div>
 );
+const geolocateStyle = {
+  float: 'left',
+  margin: '16px',
+  padding: '10px',
+};
 
-const AddStayForm = () => (
+const FormMap = () => {
+  const [viewport, setViewport] = useState({
+    width: '100%',
+    height: '100%',
+    latitude: 4.6235648,
+    longitude: -74.07534079999999,
+    zoom: 12,
+  });
+
+  useEffect(() => {
+    if (!navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition((location) => {
+      setViewport({ ...viewport, latitude: location.coords.latitude, longitude: location.coords.longitude });
+    });
+  }, []);
+
+  return (
+    <div className="h-65 md:h-128 w-full">
+      <ReactMapGL
+        {...viewport}
+        onViewportChange={setViewport}
+        mapboxApiAccessToken={token}
+        mapStyle="mapbox://styles/ivangarcia/ck8dim0x200s81iqp9qjtric3"
+      >
+        <GeolocateControl
+          style={geolocateStyle}
+          positionOptions={{ enableHighAccuracy: true }}
+          trackUserLocation={true}
+        />
+      </ReactMapGL>
+    </div>
+  );
+};
+
+// <CheckBox onChange={() => setIsSinglePerson(!isSinglePerson)}>Mas de una persona?</CheckBox>
+const AddStayForm3 = () => (
+  <form>
+    <Row>
+      <Column className="w-full text-center mb-6">
+        <H2>Que puedes ofrecerle al huesped?</H2>
+      </Column>
+    </Row>
+    <Row className="flex-wrap">
+      <Column className="w-full mb-8">
+        <FormLabel>Hospedaje</FormLabel>
+        <CheckBox onChange={() => console.log('...')}>Ayuda Basica</CheckBox>
+        <CheckBox onChange={() => console.log('...')}>Wifi</CheckBox>
+        <CheckBox onChange={() => console.log('...')}>Escritorio</CheckBox>
+      </Column>
+      <Column className="w-full mb-8">
+        <FormLabel>Que espacios pueden utilizar los huespedes?</FormLabel>
+        <CheckBox onChange={() => console.log('...')}>Ayuda Basica</CheckBox>
+        <CheckBox onChange={() => console.log('...')}>Wifi</CheckBox>
+        <CheckBox onChange={() => console.log('...')}>Escritorio</CheckBox>
+      </Column>
+      <Column className="w-full mb-8">
+        <FormLabel>Ayuda alimenticia</FormLabel>
+        <CheckBox onChange={() => console.log('...')}>Ayuda Basica</CheckBox>
+        <CheckBox onChange={() => console.log('...')}>Wifi</CheckBox>
+        <CheckBox onChange={() => console.log('...')}>Escritorio</CheckBox>
+      </Column>
+    </Row>
+  </form>
+);
+
+const AddStayForm2 = () => (
+  <form>
+    <Row>
+      <Column className="w-full text-center mb-6">
+        <H2>Donde se encuentra tu alojamiento?</H2>
+      </Column>
+    </Row>
+    <Row className="flex-wrap ">
+      <Column className="w-full md:w-auto md:pr-8">
+        <FormSelect options={['Colombia']} label="Pais" />
+      </Column>
+      <Column className="w-full md:w-auto md:pr-8">
+        <FormSelect options={['Cundinamarca']} label="Departamento" />
+      </Column>
+    </Row>
+    <Row className="flex-wrap ">
+      <Column className="w-full md:w-auto md:pr-8">
+        <FormSelect options={['Bogota']} label="Ciudad" />
+      </Column>
+      <Column className="w-full md:w-auto md:pr-8">
+        <FormInput className="w-64 mb-6" name="address" label="Direccion" value="" />
+      </Column>
+    </Row>
+    <FormMap />
+  </form>
+);
+
+const AddStayForm1 = () => (
   <form className="w-full">
     <Row>
       <Column className="w-full text-center mb-6">
@@ -124,26 +225,33 @@ const AddStayForm = () => (
   </form>
 );
 
-const AddStayWrapper = () => (
-  <Container className="flex flex-col items-center py-6">
-    <Row>
-      <Column className="w-full justify-center">
-        <H1 className="text-center">Registrar Hospedaje</H1>
-      </Column>
-    </Row>
-    <Row className="justify-center mb-8">
-      <Column className="w-full">
-        <p className="text-center">
-          Para registrar tu casa, apartamento, sofacama, etc. Sólo debes tener en cuenta estors tres simples pasos.
-        </p>
-      </Column>
-    </Row>
-    <Row className="justify-center">
-      <Steps />
-    </Row>
-    <AddStayForm />
-  </Container>
-);
+const AddStayWrapper = () => {
+  const [block, setBlock] = useState(1);
+  return (
+    <Container className="flex flex-col items-center py-6">
+      <Row>
+        <Column className="w-full justify-center">
+          <H1 className="text-center">Registrar Hospedaje</H1>
+        </Column>
+      </Row>
+      <Row className="justify-center mb-8">
+        <Column className="w-full">
+          <p className="text-center">
+            Para registrar tu casa, apartamento, sofacama, etc. Sólo debes tener en cuenta estors tres simples pasos.
+          </p>
+        </Column>
+      </Row>
+      <Row className="justify-center">
+        <Steps />
+      </Row>
+      <AddStayForm3 />
+      <FormBottom
+        back={{ label: 'Volver', url: '/' }}
+        next={{ label: `Enviar ${block}`, action: () => setBlock(block + 1) }}
+      />
+    </Container>
+  );
+};
 
 const AddStay = () => (
   <Layout>

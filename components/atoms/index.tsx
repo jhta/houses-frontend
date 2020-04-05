@@ -7,3 +7,4 @@ export * from './BackButton';
 export * from './Alert';
 export * from './ToggleSwitch';
 export * from './CheckBox';
+export * from './FormButton';
