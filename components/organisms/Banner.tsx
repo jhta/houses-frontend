@@ -29,13 +29,15 @@ export const Banner = () => (
             />
           </Column>
         </a>
-        <Column className="w-full md:w-auto items-center">
-          <BannerCard
-            imgSrc="/images/img-buscar.png"
-            title="Buscar Hospedaje"
-            description="Pariatur nulla exercitation et sint cupidatat fugiat enim ea quis"
-          />
-        </Column>
+        <a className="cursor-pointer" href="/map/mapPage">
+          <Column className="w-full md:w-auto items-center">
+            <BannerCard
+              imgSrc="/images/img-buscar.png"
+              title="Buscar Hospedaje"
+              description="Pariatur nulla exercitation et sint cupidatat fugiat enim ea quis"
+            />
+          </Column>
+        </a>
       </Row>
     </Container>
   </section>
