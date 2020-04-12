@@ -51,28 +51,32 @@ const MapPage = ({ places }) => {
         mapboxApiAccessToken={token}
         mapStyle="mapbox://styles/ivangarcia/ck8dim0x200s81iqp9qjtric3"
       >
-        <div className="absolute mx-32 opacity-75 right-0 left-0 top-0 z-10 mt-4 bg-white h-24 px-10">
+        <div className="hidden sm:block lg:absolute lg:mx-20 opacity-75 right-0 left-0 top-0 z-10 lg:mt-4 bg-white h-32 lg:px-10">
           <div className="p-2 font-bold">
             <label>Fijar alojamiento</label>
-            <div className="flex justify-between pt-2">
-              <div>
-                <button className="border-solid border rounded-full h-8 w-24 text-center">Fechas</button>
+            <div className="flex justify-between pt-4">
+              <div className="lg:flex">
+                <div>
+                  <button className="border-solid border text-gray-3 rounded-full h-8 w-24 text-center">
+                    <p className="text-black">Fechas</p>
+                  </button>
+                </div>
+                <div className="lg:mx-4 sm:py-2 lg:py-0">
+                  <button className="border-solid border text-gray-3 rounded-full h-8 w-40 text-center">
+                    <p className="text-black">Tipo de espacio</p>
+                  </button>
+                </div>
               </div>
-              <div>
-                <button className="border-solid border rounded-full h-8 w-40 text-center">Tipo de espacio</button>
-              </div>
-              <div>
-                <ToggleSwitch isChecked={isViajero} onChange={() => setIsViajero(!isViajero)}>
+              <div className="lg:flex lg:mx-auto lg:w-5/12">
+                <ToggleSwitch isChecked={isViajero} isGrow isCenter onChange={() => setIsViajero(!isViajero)}>
                   Soy Viajer@
                 </ToggleSwitch>
-              </div>
-              <div>
                 <ToggleSwitch isChecked={isMedico} onChange={() => setIsMedico(!isMedico)}>
                   Soy medic@/enfermer@
                 </ToggleSwitch>
               </div>
-              <div>
-                <button className="border-solid border rounded h-8 w-32 text-center">Filtrar</button>
+              <div className="">
+                <button className="border-solid border rounded text-primary h-8 w-32 text-center">Filtrar</button>
               </div>
             </div>
           </div>

@@ -1,9 +1,15 @@
 import styled from 'styled-components';
+import classnames from 'classnames';
 
 export const ToggleSwitch = (props) => {
-  const { children, isChecked, onChange, className } = props;
+  const { children, isChecked, onChange, className, isGrow } = props;
   return (
-    <div className={`flex items-center justify-center w-full ${className}`}>
+    <div
+      className={`flex w-full ${classnames(
+        { ' items-center justify-center ': !isGrow },
+        { 'my-2': isGrow }
+      )} ${className}`}
+    >
       <label className="flex items-center cursor-pointer">
         <div className="relative">
           <CheckboxToggle onChange={onChange} checked={isChecked} id="toogleA" type="checkbox" className="hidden" />
