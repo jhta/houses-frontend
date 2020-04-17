@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Slide from 'react-reveal/Slide';
+import Fade from 'react-reveal/Fade';
 import { Layout } from '../../components/layout';
 import { H1, FormStep } from '../../components/atoms';
 import { Container, Column, Row } from '../../components/grid';
@@ -64,7 +64,8 @@ const AddStayPage = () => {
         <Row className="justify-center mb-8">
           <Column className="w-full">
             <p className="text-center">
-              Para registrar tu casa, apartamento, sofacama, etc. Sólo debes tener en cuenta estors tres simples pasos.
+              Para registrar tu casa, apartamento, habitación, sofacama, etc. Solo debes tener en cuenta estos tres
+              simples pasos.
             </p>
           </Column>
         </Row>
@@ -85,21 +86,21 @@ const AddStayPage = () => {
 
 const ShowFirstBlockIfSelected = ({ block = 0, direction }) =>
   block === 1 ? (
-    <Slide right={DIRECTION.left === direction}>
+    <Fade>
       <FormFirstPart />{' '}
-    </Slide>
+    </Fade>
   ) : null;
 const ShowSecondBlockIfSelected = ({ block = 0, direction }) =>
   block === 2 ? (
-    <Slide right={DIRECTION.right === direction} left={DIRECTION.left == direction}>
+    <Fade>
       <FormSecondPart />{' '}
-    </Slide>
+    </Fade>
   ) : null;
 const ShowThirdBlockIfSelected = ({ block = 0, direction }) =>
   block === 3 ? (
-    <Slide right={DIRECTION.right === direction}>
+    <Fade>
       <FormThirdPart />{' '}
-    </Slide>
+    </Fade>
   ) : null;
 
 AddStayPage.getInitialProps = async ({ req }) => {

@@ -27,7 +27,7 @@ export const FormMap = () => {
   }, []);
 
   return (
-    <div className="h-65 md:h-128 w-full">
+    <div className="h-65 md:h-128 w-65 md:w-128">
       <ReactMapGL
         {...viewport}
         onViewportChange={setViewport}

@@ -8,7 +8,7 @@ export const FormButton = (props) => {
         onClick={props.action}
         disabled={disable}
         className={classnames(
-          'form-input mt-4 block font-bold text-base w-full rounded',
+          'form-input mt-4 block font-bold text-base rounded',
           { 'bg-gray-5 text-textColor cursor-not-allowed': disable },
           { 'bg-primary text-white': !disable }
         )}

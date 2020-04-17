@@ -6,7 +6,7 @@ export const FormThirdPart = () => (
   <form>
     <Row>
       <Column className="w-full text-center mb-6">
-        <H2>Que puedes ofrecerle al huesped?</H2>
+        <H2>¿Qué puedes ofrecerle a tu huésped?</H2>
       </Column>
     </Row>
     <Row className="flex-wrap">

@@ -22,7 +22,7 @@ export const FormBottom = ({
           </div>
         </a>
       </Column>
-      <Column className="w-1/2">
+      <Column className="w-1/2 items-end">
         <FormButton action={nextAction}>{nextLabel}</FormButton>
       </Column>
     </Row>

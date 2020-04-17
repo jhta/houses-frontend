@@ -17,26 +17,24 @@ const radioBoxOptions = [
   {
     label: 'Todo el lugar',
     secondaryLabel:
-      'los huespedes disponen de alojamiento entero para ellos. Esto normalmente incluye una habitacion, un baño y una cocina',
+      'Los huéspedes disponen del alojamiento entero para ellos. Esto normalmente incluye una habitación, un baño y una cocina.',
   },
   {
-    label: 'Todo el lugar',
-    secondaryLabel:
-      'los huespedes disponen de alojamiento entero para ellos. Esto normalmente incluye una habitacion, un baño y una cocina',
+    label: 'Habitación privada',
+    secondaryLabel: 'Los huéspedes disponen de una habitación privada para dormir. Se pueden compartir otras áreas.',
   },
   {
-    label: 'Todo el lugar',
-    secondaryLabel:
-      'los huespedes disponen de alojamiento entero para ellos. Esto normalmente incluye una habitacion, un baño y una cocina',
+    label: 'Habitación compartida',
+    secondaryLabel: 'Los huéspedes duermen en una habitación o área común que podrían compartir con otras personas.',
   },
 ];
 
 const radioBoxOptionsSpace = [
   {
-    label: 'Sí, esta pensado principalmente para los huespedes',
+    label: 'Sí, está pensado principalmente para los huéspedes',
   },
   {
-    label: 'No, dejo mis pertenencias aqui',
+    label: 'No, dejo mis pertenencias aquí',
   },
 ];
 
@@ -44,21 +42,18 @@ export const FormFirstPart = () => (
   <form className="w-full">
     <Row>
       <Column className="w-full text-center mb-6">
-        <H2>Qué tipo de alojamiento ofreces?</H2>
+        <H2>¿Qué tipo de alojamiento ofreces?</H2>
       </Column>
     </Row>
     <Row className="flex-wrap ">
-      <Column className="w-full md:w-auto md:pr-8">
+      {/* <Column className="w-full md:w-auto md:pr-8">
         <FormSelect
           options={['apartamento', 'casa', 'habitacion', 'sofa cama']}
           label="Para empezar, vamos a  simplificar"
         />
-      </Column>
+      </Column> */}
       <Column className="w-full md:w-auto md:pr-8">
-        <FormSelect
-          options={['apartamento', 'casa', 'habitacion', 'sofa cama']}
-          label="Ahora elige un tipo de propiedad"
-        />
+        <FormSelect options={['apartamento', 'casa', 'habitacion', 'sofa cama']} label="Tipo de propiedad" />
       </Column>
     </Row>
     <Row className="mb-6">
@@ -68,14 +63,14 @@ export const FormFirstPart = () => (
     </Row>
     <Row>
       <Column className="w-full">
-        <FormRadioBoxList options={radioBoxOptionsSpace} label="es un espacio exclusivo para los huespedes?" />
+        <FormRadioBoxList options={radioBoxOptionsSpace} label="¿Es un espacio exclusivo para los huéspedes?" />
       </Column>
     </Row>
     <Row className="flex-wrap mb-6">
       <Column className="w-full md:w-auto md:pr-8">
         <FormSelect
           options={['1 cama', '2 camas', '3 camas', '4 camas']}
-          label="Cuantas camas pueden utiliar los huespedes?"
+          label="¿Cuántas camas pueden utilizar los huéspedes?"
         />
       </Column>
     </Row>
