@@ -8,3 +8,5 @@ export * from './Alert';
 export * from './ToggleSwitch';
 export * from './CheckBox';
 export * from './FormButton';
+export * from './FormLabel';
+export * from './FormStep';

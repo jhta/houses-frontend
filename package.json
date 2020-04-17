@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "sart": "next start",
+    "start": "next start",
     "tslint": "tslint -p . -c tslint.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

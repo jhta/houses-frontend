@@ -86,12 +86,13 @@ interface PostPlaceResponse extends RequestResponse {
   };
 }
 
-export async function postPlace(params: PostParams): Promise<PostPlaceResponse> {
+export async function postPlace(params: PostParams, authorization): Promise<PostPlaceResponse> {
   const options: AxiosRequestConfig = {
     method: 'POST',
     url: `${Endpoint.places}`,
     baseURL: API_URL,
     data: params,
+    headers: { Authorization: `Bearer ${authorization}` },
   };
 
   try {
