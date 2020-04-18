@@ -12,7 +12,7 @@ export const FormSecondPart = () => (
         <H2>Donde se encuentra tu alojamiento?</H2>
       </Column>
     </Row>
-    <Row className="flex-wrap justify-center">
+    {/* <Row className="flex-wrap justify-center">
       <Column className="w-full md:w-auto md:pr-8">
         <FormSelect options={['Colombia']} label="Pais" />
       </Column>
@@ -27,7 +27,7 @@ export const FormSecondPart = () => (
       <Column className="w-full md:w-auto md:pr-8">
         <FormInput className="w-64 mb-6" name="address" label="Dirección" value="" />
       </Column>
-    </Row>
+    </Row> */}
     <Row className="mb-8 justify-center">
       <Column className="w-full md:w-1/2">
         <FormLabel>¿Está el marcador en el lugar correcto?</FormLabel>

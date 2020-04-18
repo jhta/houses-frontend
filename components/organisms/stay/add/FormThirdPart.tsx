@@ -14,19 +14,14 @@ export const FormThirdPart = () => (
         <FormLabel>Hospedaje</FormLabel>
         <CheckBox onChange={() => console.log('...')}>Ayuda Basica</CheckBox>
         <CheckBox onChange={() => console.log('...')}>Wifi</CheckBox>
-        <CheckBox onChange={() => console.log('...')}>Escritorio</CheckBox>
+        <CheckBox onChange={() => console.log('...')}>Ayuda Alimenticia</CheckBox>
+        {/* <CheckBox onChange={() => console.log('...')}>Escritorio</CheckBox> */}
       </Column>
       <Column className="w-full mb-8">
-        <FormLabel>Que espacios pueden utilizar los huespedes?</FormLabel>
-        <CheckBox onChange={() => console.log('...')}>Ayuda Basica</CheckBox>
-        <CheckBox onChange={() => console.log('...')}>Wifi</CheckBox>
-        <CheckBox onChange={() => console.log('...')}>Escritorio</CheckBox>
-      </Column>
-      <Column className="w-full mb-8">
-        <FormLabel>Ayuda alimenticia</FormLabel>
-        <CheckBox onChange={() => console.log('...')}>Ayuda Basica</CheckBox>
-        <CheckBox onChange={() => console.log('...')}>Wifi</CheckBox>
-        <CheckBox onChange={() => console.log('...')}>Escritorio</CheckBox>
+        <FormLabel>¿Qué espacios pueden utilizar los huéspedes?</FormLabel>
+        <CheckBox onChange={() => console.log('...')}>Cocina</CheckBox>
+        {/* <CheckBox onChange={() => console.log('...')}>Lavadora</CheckBox> */}
+        <CheckBox onChange={() => console.log('...')}>Estacionamiento</CheckBox>
       </Column>
     </Row>
   </form>

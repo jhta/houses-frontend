@@ -13,42 +13,58 @@ enum SUBMIT_BUTTON_LABELS {
   'submit' = 'Enviar',
 }
 
-enum DIRECTION {
-  right,
-  left,
-}
+const initialForm = {
+  latitude: 0,
+  longitude: 0,
+  address: '',
+  phone: '',
+  description: '',
+  guestsAllowed: 1,
+  bathroom: true,
+  food: false,
+  kitchen: false,
+  parking: false,
+  availableFrom: '2020-04-18T14:55:11.247Z',
+  availableTo: '2020-04-18T14:55:11.247Z',
+  active: true,
+  creationDate: '2020-04-18T14:55:11.247Z',
+  internet: true,
+  entireHouse: true,
+  user: {
+    location: {
+      id: 0,
+    },
+  },
+  location: {
+    id: 0,
+  },
+};
 
 const Steps = ({ active = 1 }) => (
   <div className="flex flex-row mb-8">
     <FormStep isActive={active === 1}>1</FormStep>
     <FormStep isActive={active === 2}>2</FormStep>
-    <FormStep isActive={active === 3}>3</FormStep>
+    {/* <FormStep isActive={active === 3}>3</FormStep> */}
   </div>
 );
 
 const AddStayPage = () => {
   const [block, setBlock] = useState(1);
   const [buttonLabel, setButtonLabel] = useState(SUBMIT_BUTTON_LABELS.next);
-  const [direction, setDirection] = useState(DIRECTION.right);
+  const [form, setFormInputs] = useState(initialForm);
 
   const onClickNextButton = () => {
-    setDirection(DIRECTION.right);
-    if (block < 3) {
-      setBlock(block + 1);
-    } else if (block === 2) {
+    if (block === 1) {
       setBlock(block + 1);
       setButtonLabel(SUBMIT_BUTTON_LABELS.submit);
-    } else if (block == 3) {
+    } else if (block == 2) {
       alert('submit');
     }
   };
 
   const onClickBackButton = () => {
-    setDirection(DIRECTION.left);
-    if (block > 1) {
-      setBlock(block - 1);
-    } else if (block === 3) {
-      setBlock(block - 1);
+    setBlock(block - 1);
+    if (block === 2) {
       setButtonLabel(SUBMIT_BUTTON_LABELS.next);
     }
   };
@@ -72,11 +88,10 @@ const AddStayPage = () => {
         <Row className="justify-center">
           <Steps active={block} />
         </Row>
-        <ShowFirstBlockIfSelected block={block} direction={direction} />
-        <ShowSecondBlockIfSelected block={block} direction={direction} />
-        <ShowThirdBlockIfSelected block={block} direction={direction} />
+        <ShowFirstBlockIfSelected block={block} setFormInputs={setFormInputs} />
+        <ShowSecondBlockIfSelected block={block} />
         <FormBottom
-          back={{ label: 'Volver', action: onClickBackButton }}
+          back={{ label: 'Volver', action: onClickBackButton, show: block !== 1 }}
           next={{ label: buttonLabel, action: onClickNextButton }}
         />
       </Container>
@@ -84,22 +99,16 @@ const AddStayPage = () => {
   );
 };
 
-const ShowFirstBlockIfSelected = ({ block = 0, direction }) =>
+const ShowFirstBlockIfSelected = ({ block = 0, setFormInputs }) =>
   block === 1 ? (
     <Fade>
-      <FormFirstPart />{' '}
+      <FormFirstPart setFormInputs={setFormInputs} />
     </Fade>
   ) : null;
-const ShowSecondBlockIfSelected = ({ block = 0, direction }) =>
+const ShowSecondBlockIfSelected = ({ block = 0 }) =>
   block === 2 ? (
     <Fade>
       <FormSecondPart />{' '}
-    </Fade>
-  ) : null;
-const ShowThirdBlockIfSelected = ({ block = 0, direction }) =>
-  block === 3 ? (
-    <Fade>
-      <FormThirdPart />{' '}
     </Fade>
   ) : null;
 
