@@ -89,10 +89,14 @@ const AddStayPage = () => {
           <Steps active={block} />
         </Row>
         <ShowFirstBlockIfSelected block={block} setFormInputs={setFormInputs} />
-        <ShowSecondBlockIfSelected block={block} />
+        <ShowSecondBlockIfSelected block={block} setFormInputs={setFormInputs} form={form} />
         <FormBottom
           back={{ label: 'Volver', action: onClickBackButton, show: block !== 1 }}
-          next={{ label: buttonLabel, action: onClickNextButton }}
+          next={{
+            label: buttonLabel,
+            action: onClickNextButton,
+            disable: form.address.length < 5 && form.phone.length < 6 && block === 2,
+          }}
         />
       </Container>
     </Layout>
@@ -105,10 +109,10 @@ const ShowFirstBlockIfSelected = ({ block = 0, setFormInputs }) =>
       <FormFirstPart setFormInputs={setFormInputs} />
     </Fade>
   ) : null;
-const ShowSecondBlockIfSelected = ({ block = 0 }) =>
+const ShowSecondBlockIfSelected = ({ block = 0, setFormInputs, form }) =>
   block === 2 ? (
     <Fade>
-      <FormSecondPart />{' '}
+      <FormSecondPart setFormInputs={setFormInputs} form={form} />
     </Fade>
   ) : null;
 

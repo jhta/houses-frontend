@@ -13,7 +13,7 @@ export const HeaderLinks = () => (
     <Column>
       <div className="hidden sm:inline-block py-4">
         <HeaderLink href="/stay/add">Agregar anuncio</HeaderLink>
-        <HeaderLink href="/">Anfitrion</HeaderLink>
+        {/* <HeaderLink href="/">Anfitrion</HeaderLink> */}
         <HeaderLink href="/">Mis Solicitudes</HeaderLink>
         <HeaderLink href="/session/login">Inicia sesion</HeaderLink>
       </div>
