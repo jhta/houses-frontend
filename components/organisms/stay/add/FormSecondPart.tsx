@@ -14,6 +14,11 @@ export const FormSecondPart = ({ setFormInputs, form }) => {
   const setPosition = (position) => {
     setFormInputs((inputs) => ({ ...inputs, ...position }));
   };
+
+  const setPhone = (e) => {
+    const { value } = e.target;
+    setFormInputs((inputs) => ({ ...inputs, phone: value }));
+  };
   return (
     <form className="flex flex-col items-center">
       <Row className="justify-center">
@@ -31,7 +36,7 @@ export const FormSecondPart = ({ setFormInputs, form }) => {
       </Row>
       <Row className="flex-wrap justify-center">
         <Column className="md:pr-8">
-          <FormInput className="w-64" label="Telefono" name="phone" type="number" onChange={() => {}} />
+          <FormInput className="w-64" label="Telefono" name="phone" type="number" onChange={setPhone} />
         </Column>
         <Column className="md:w-auto md:pr-8">
           <FormInput

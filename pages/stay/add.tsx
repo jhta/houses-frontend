@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import Router from 'next/router';
 import Fade from 'react-reveal/Fade';
 import { Layout } from '../../components/layout';
 import { H1, FormStep } from '../../components/atoms';
 import { Container, Column, Row } from '../../components/grid';
 import { FormBottom } from '../../components/molecules';
 import { FormFirstPart, FormSecondPart, FormThirdPart } from '../../components/organisms/stay/add';
-import { getPlaceById, IGetPlaceResponse } from '../../services/apis/places';
+import { postPlace, IPostPlaceResponse, IPostParams } from '../../services/apis/places';
 import { getTokenFromRequest } from '../../utils/getCookie';
+import { asPage } from '../../utils/asPage';
 
 enum SUBMIT_BUTTON_LABELS {
   'next' = 'Siguiente',
   'submit' = 'Enviar',
 }
 
-const initialForm = {
+const initialForm: IPostParams = {
   latitude: 0,
   longitude: 0,
   address: '',
   phone: '',
-  description: '',
+  description: '......',
   guestsAllowed: 1,
   bathroom: true,
   food: false,
@@ -27,16 +29,15 @@ const initialForm = {
   availableFrom: '2020-04-18T14:55:11.247Z',
   availableTo: '2020-04-18T14:55:11.247Z',
   active: true,
-  creationDate: '2020-04-18T14:55:11.247Z',
   internet: true,
   entireHouse: true,
   user: {
     location: {
-      id: 0,
+      id: 1,
     },
   },
   location: {
-    id: 0,
+    id: 1,
   },
 };
 
@@ -52,13 +53,28 @@ const AddStayPage = () => {
   const [block, setBlock] = useState(1);
   const [buttonLabel, setButtonLabel] = useState(SUBMIT_BUTTON_LABELS.next);
   const [form, setFormInputs] = useState(initialForm);
+  const [loading, setLoader] = useState(false);
+  const [errors, setErrors] = useState([]);
+
+  const submit = async () => {
+    setLoader(true);
+    try {
+      await postPlace(form);
+      setLoader(false);
+      Router.push('/');
+    } catch (e) {
+      setLoader(false);
+      setErrors([e.message]);
+      console.log(e);
+    }
+  };
 
   const onClickNextButton = () => {
     if (block === 1) {
       setBlock(block + 1);
       setButtonLabel(SUBMIT_BUTTON_LABELS.submit);
     } else if (block == 2) {
-      alert('submit');
+      submit();
     }
   };
 
@@ -68,6 +84,8 @@ const AddStayPage = () => {
       setButtonLabel(SUBMIT_BUTTON_LABELS.next);
     }
   };
+
+  const isFormIncomplete = form.address.length < 5 && form.phone.length < 6;
 
   return (
     <Layout>
@@ -95,7 +113,7 @@ const AddStayPage = () => {
           next={{
             label: buttonLabel,
             action: onClickNextButton,
-            disable: form.address.length < 5 && form.phone.length < 6 && block === 2,
+            disable: (isFormIncomplete && block === 2) || loading,
           }}
         />
       </Container>
@@ -116,15 +134,4 @@ const ShowSecondBlockIfSelected = ({ block = 0, setFormInputs, form }) =>
     </Fade>
   ) : null;
 
-AddStayPage.getInitialProps = async ({ req }) => {
-  const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
-  // TODO: improve auth token config and add it to a global decorator
-  let authorization = '';
-  if (typeof req !== 'undefined') {
-    authorization = getTokenFromRequest(req);
-  }
-
-  return {};
-};
-
-export default AddStayPage;
+export default asPage(AddStayPage);

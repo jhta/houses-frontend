@@ -21,10 +21,10 @@ export interface IPlace {
   latitude: number;
   longitude: number;
   address?: string;
-  phone: number;
+  phone: string;
   description?: string;
   kitchen?: boolean;
-  guestAllowed: number;
+  guestsAllowed: number;
   food?: boolean;
   parking?: boolean;
   bathroom?: boolean;
@@ -32,12 +32,7 @@ export interface IPlace {
   availableTo?: string;
   internet?: boolean;
   active?: boolean;
-  // "active": true,
-  // "creationDate": "2020/03/26 22:21:51",
-  // "internet": false,
-  // "entireHouse": false,
-  // "user": null,
-  // "location": null
+  entireHouse?: boolean;
 }
 
 export interface IPlacesResponse extends RequestResponse {
@@ -49,7 +44,6 @@ export interface IPlacesResponse extends RequestResponse {
 // TODO: Improve the authorization config
 export async function getPlaces(params: PlacesParams, navigation): Promise<IPlacesResponse> {
   const formattedParams = qs.stringify(params);
-  const token = cookies.get('token') || '';
 
   const options: AxiosRequestConfig = {
     method: 'GET',
@@ -69,7 +63,7 @@ export async function getPlaces(params: PlacesParams, navigation): Promise<IPlac
   }
 }
 
-interface PostParams extends IPlace {
+export interface IPostParams extends IPlace {
   location: {
     id: number;
   };
@@ -80,24 +74,21 @@ interface PostParams extends IPlace {
   };
 }
 
-interface PostPlaceResponse extends RequestResponse {
+export interface IPostPlaceResponse extends RequestResponse {
   data: {
     id: number;
   };
 }
 
-export async function postPlace(params: PostParams, authorization): Promise<PostPlaceResponse> {
+export async function postPlace(params: IPostParams): Promise<IPostPlaceResponse> {
   const options: AxiosRequestConfig = {
     method: 'POST',
     url: `${Endpoint.places}`,
-    baseURL: API_URL,
     data: params,
-    headers: { Authorization: `Bearer ${authorization}` },
   };
 
   try {
-    const { data } = await axios(options);
-    console.log(data);
+    const { data } = await localAxios(options);
     const { id } = data;
     return { data: { id }, error: {} };
   } catch (error) {

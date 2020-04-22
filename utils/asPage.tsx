@@ -1,25 +1,28 @@
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import { ThemeProvider } from 'emotion-theming';
+import { getTokenFromRequest } from './getCookie';
 
 export const asPage = (Component) => {
-  const AsPage = ({ theme = {}, ...rest }) => {
+  const AsPage = ({ authorization, ...rest }) => {
     return <Component {...rest} />;
   };
 
   hoistNonReactStatics(AsPage, Component);
 
   AsPage.getInitialProps = async (ctx) => {
+    let authorization = '';
+    if (typeof ctx.req !== 'undefined') {
+      authorization = getTokenFromRequest(ctx.req);
+    }
     if (Component.getInitialProps) {
-      const newCtx = {
+      const initialProps = await Component.getInitialProps({
         ...ctx,
-      };
-
-      const initialProps = await Component.getInitialProps(newCtx);
+        authorization,
+      });
       return initialProps;
     }
-
-    return {};
+    return { authorization };
   };
   return AsPage;
 };
