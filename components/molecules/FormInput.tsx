@@ -1,7 +1,7 @@
 import { RequiredLabel } from '../atoms/RequireLabel';
 
 export const FormInput = (props) => {
-  const { label, name, type, value, onChange, className } = props;
+  const { label, name = '', type, value, onChange, className } = props;
   return (
     <>
       <label className={`block ${className}`}>
@@ -14,7 +14,7 @@ export const FormInput = (props) => {
           value={value}
           onChange={onChange}
         />
-        {/* <RequiredLabel name={name} /> */}
+        <RequiredLabel name={name} />
       </label>
     </>
   );

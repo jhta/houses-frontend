@@ -6,14 +6,13 @@ const getCookieToken = () => {
   return cookies.get('token');
 };
 
-export default function getInstance(options) {
-  console.log('why it doesnt work here');
+export default function getInstance(options, noHeaders = false) {
   const token = getCookieToken();
   console.log('this is the token', token);
   const instance = axios.create({
     baseURL: API_URL,
     timeout: 6000,
-    headers: { Authorization: `Bearer ${token}`, test: 'test' },
+    headers: noHeaders ? {} : { Authorization: `Bearer ${token}`, test: 'test' },
   });
 
   return instance(options);

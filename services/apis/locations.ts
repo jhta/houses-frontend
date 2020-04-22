@@ -12,21 +12,21 @@ export interface LocationParams {
   PageSize?: number;
   MaxPageSize?: number;
 }
-interface Location {
+interface ILocation {
   id: number;
   name: string;
   parentLocation: number | null;
 }
 
-interface LocationsResponse extends RequestResponse {
+interface ILocationsResponse extends RequestResponse {
   data:
     | {
-        locations: Location[];
+        locations: ILocation[];
       }
     | {};
 }
 
-export async function getLocations(params: LocationParams): Promise<LocationsResponse> {
+export async function getLocations(params: LocationParams): Promise<ILocationsResponse> {
   const formattedParams = qs.stringify(params);
   const options: AxiosRequestConfig = {
     method: 'GET',

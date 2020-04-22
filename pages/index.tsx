@@ -3,9 +3,9 @@ import { asPage } from '../utils';
 import { Banner, HomeSection } from '../components/organisms';
 import { Layout } from '../components/layout';
 
-const Home = () => (
+const Home = ({ authorization }) => (
   <div>
-    <Layout>
+    <Layout isAuth={Boolean(authorization)}>
       <Banner />
       <HomeSection
         title="Como funciona?"

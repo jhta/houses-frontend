@@ -4,8 +4,8 @@ import { ThemeProvider } from 'emotion-theming';
 import { getTokenFromRequest } from './getCookie';
 
 export const asPage = (Component) => {
-  const AsPage = ({ authorization, ...rest }) => {
-    return <Component {...rest} />;
+  const AsPage = (props) => {
+    return <Component {...props} />;
   };
 
   hoistNonReactStatics(AsPage, Component);
