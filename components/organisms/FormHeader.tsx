@@ -1,8 +1,27 @@
 import classnames from 'classnames';
 import Router from 'next/router';
 
+const FormHeaderButton = ({ isDisable, route, title }) => (
+  <button
+    className={classnames(
+      'outline-none',
+      { 'text-white font-bold text-2xl mx-2 text-shadow': isDisable },
+      {
+        'flex text-secondary  justify-center items-center bg-fourth rounded-full  m-2 px-4 p-1': !isDisable,
+      }
+    )}
+    disabled={isDisable}
+    onClick={(e) => {
+      e.preventDefault();
+      Router.push(route);
+    }}
+  >
+    <label className="cursor-pointer">{title}</label>
+  </button>
+);
+
 export const FormHeader = (props) => {
-  const { centerTitle, rightTitle, leftTitle, srcImg, currentForm, setIsCurrentForm } = props;
+  const { centerTitle, rightTitle, leftTitle, srcImg, currentForm } = props;
   const isRegister = currentForm === 'register';
   return (
     <div className="flex justify-center items-center text-center">
@@ -10,39 +29,9 @@ export const FormHeader = (props) => {
         <img src={srcImg} alt="icon" className="mx-auto" />
         <h1 className="text-gray-2 font-bold text-2xl">{centerTitle}</h1>
         <div className="flex py-2 outline-none">
-          <button
-            className={classnames(
-              'outline-none',
-              { 'text-white font-bold text-2xl mx-2': isRegister },
-              {
-                'flex text-secondary mx-2 w-20 justify-center items-center bg-fourth rounded-full h-8 my-2 mx-2': !isRegister,
-              }
-            )}
-            disabled={isRegister}
-            onClick={(e) => {
-              e.preventDefault();
-              Router.push('/session/register');
-            }}
-          >
-            <label className="cursor-pointer">{leftTitle}</label>
-          </button>
+          <FormHeaderButton isDisable={isRegister} route="/session/register" title={leftTitle} />
           <strong className="text-primary text-3xl">|</strong>
-          <button
-            className={classnames(
-              'outline-none',
-              { 'text-white font-bold text-2xl mx-2': !isRegister },
-              {
-                'flex text-secondary mx-2 w-24 justify-center items-center bg-fourth rounded-full h-8 my-2 mx-2': isRegister,
-              }
-            )}
-            disabled={!isRegister}
-            onClick={(e) => {
-              e.preventDefault();
-              Router.push('/session/login');
-            }}
-          >
-            <label className="cursor-pointer">{rightTitle}</label>
-          </button>
+          <FormHeaderButton isDisable={!isRegister} route="/session/login" title={rightTitle} />
         </div>
       </div>
     </div>

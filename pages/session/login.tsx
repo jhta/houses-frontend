@@ -5,7 +5,7 @@ import { BackButton } from '../../components/atoms';
 
 const FormPage = () => {
   return (
-    <div className="py-4 bg-third">
+    <div className="py-4 session-gradient">
       <BackButton href="/">Volver</BackButton>
       <FormHeader
         centerTitle="Hospedaje"

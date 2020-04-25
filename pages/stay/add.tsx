@@ -61,7 +61,7 @@ const AddStayPage = () => {
     try {
       await postPlace(form);
       setLoader(false);
-      Router.push('/');
+      Router.push('/stay/thanks');
     } catch (e) {
       setLoader(false);
       setErrors([e.message]);

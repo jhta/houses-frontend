@@ -2,8 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 body {
   @apply bg-gray-5;
+}
+
+.session-gradient {
+  background: transparent linear-gradient(135deg, #caebfe 0%, #a1d6ff 100%) 0% 0% no-repeat padding-box;
 }
 
 p {

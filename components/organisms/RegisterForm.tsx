@@ -82,7 +82,7 @@ export const RegisterForm = (props) => {
       }}
     >
       {({ values, errors, handleSubmit, setValues, handleChange, handleBlur, setTouched, touched }) => (
-        <form onSubmit={handleSubmit} noValidate className="bg-third h-screen" autoComplete="off">
+        <form onSubmit={handleSubmit} noValidate className="h-screen" autoComplete="off">
           <div className="p-10 flex-grow md:w-3/5 lg:w-3/5 xl:w-2/5 mx-auto">
             <FormInput label="Nombre" name="name" value={values.name} onChange={handleChange} />
 

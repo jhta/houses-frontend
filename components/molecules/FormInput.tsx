@@ -14,7 +14,7 @@ export const FormInput = (props) => {
           value={value}
           onChange={onChange}
         />
-        <RequiredLabel name={name} />
+        {/* <RequiredLabel name={name} /> */}
       </label>
     </>
   );

@@ -125,7 +125,7 @@ export const RequestForm = (props) => {
             <div className="lg:flex lg:justify-between px-2">
               <a className="text-primary text-lg cursor-pointer" href="/map/mapPage">
                 <div className="py-4 lg:flex lg:justify-center items-center text-center">
-                  {'<'} Volver a la busqueda
+                  {'&#8250;'} Volver a la busqueda
                 </div>
               </a>
               <FormButton>Enviar ></FormButton>
