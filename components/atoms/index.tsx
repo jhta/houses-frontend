@@ -10,3 +10,4 @@ export * from './CheckBox';
 export * from './FormButton';
 export * from './FormLabel';
 export * from './FormStep';
+export * from './Spinner';

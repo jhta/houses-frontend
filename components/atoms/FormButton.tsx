@@ -1,7 +1,8 @@
 import classnames from 'classnames';
+import { Spinner } from '../atoms';
 
 export const FormButton = (props) => {
-  const { children, disable } = props;
+  const { children, disable, loading } = props;
   return (
     <label className="block">
       <button
@@ -14,7 +15,7 @@ export const FormButton = (props) => {
         )}
         type="submit"
       >
-        {children}
+        {loading ? <Spinner /> : children}
       </button>
     </label>
   );

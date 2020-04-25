@@ -114,6 +114,7 @@ const AddStayPage = () => {
             label: buttonLabel,
             action: onClickNextButton,
             disable: (isFormIncomplete && block === 2) || loading,
+            loading: loading,
           }}
         />
       </Container>

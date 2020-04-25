@@ -5,11 +5,11 @@ import classnames from 'classnames';
 import { string, object } from 'yup';
 
 import { FormInput } from '../molecules';
-import { Alert } from '../atoms';
+import { Alert, Spinner } from '../atoms';
 import { login } from '../../services/oauth';
 
 const FormButton = (props) => {
-  const { children, disable } = props;
+  const { children, disable, isLoading } = props;
   return (
     <label className="block">
       <button
@@ -21,7 +21,7 @@ const FormButton = (props) => {
         )}
         type="submit"
       >
-        {children}
+        {isLoading ? <Spinner /> : children}
       </button>
     </label>
   );
@@ -50,7 +50,7 @@ export const LoginForm = (props) => {
         try {
           setLoader(false);
           const { data, error } = await login({ username, password });
-          if (data.ok) Router.push('/');
+          if (data.ok) window.location.href = '/';
 
           if (error) setErrors([error]);
         } catch (error) {
@@ -71,7 +71,9 @@ export const LoginForm = (props) => {
               value={values.password}
               onChange={handleChange}
             />
-            <FormButton disable={isLoading}>Entrar ></FormButton>
+            <FormButton disable={isLoading} isLoading={isLoading}>
+              Entrar
+            </FormButton>
             {errors.length ? <Alert message={errors.join('\n')} /> : null}
           </div>
         </form>

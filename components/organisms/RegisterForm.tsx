@@ -2,15 +2,32 @@ import React, { useState } from 'react';
 import classnames from 'classnames';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { Spinner } from '../atoms';
 import { FormDropdown, FormInput } from '../molecules';
 import { postUser } from '../../services/apis/user';
 import { login } from '../../services/oauth';
 
 const { string, object } = yup;
 
+const FormButton = (props) => {
+  const { children, disable, isLoading } = props;
+  return (
+    <label className="block">
+      <button
+        disabled={disable}
+        className={classnames(
+          'form-input mt-4 block font-bold text-base w-full rounded',
+          { 'bg-gray-5 text-textColor cursor-not-allowed': disable },
+          { 'bg-primary text-white': !disable }
+        )}
+        type="submit"
+      >
+        {isLoading ? <Spinner /> : children}
+      </button>
+    </label>
+  );
+};
 export const RegisterForm = (props) => {
-  const { isCurrentForm, setIsCurrentForm } = props;
-
   const validationSchema = object().shape({
     name: string().required('* El nombre es requerido'),
     email: string().email('correo inválido').required('* El correo es requerido'),
@@ -21,25 +38,6 @@ export const RegisterForm = (props) => {
     pais: string().required('* El pais es requerido'),
     ciudad: string().required('* La ciudad es requerida'),
   });
-
-  const FormButton = (props) => {
-    const { children, disable } = props;
-    return (
-      <label className="block">
-        <button
-          disabled={disable}
-          className={classnames(
-            'form-input bg-primary mt-4 block text-white font-bold text-base w-full rounded',
-            { 'bg-primary text-white': !disable },
-            { 'bg-gray-6 text-bg-gray-5': disable }
-          )}
-          type="submit"
-        >
-          {children}
-        </button>
-      </label>
-    );
-  };
 
   const [isLoading, setLoader] = useState(false);
   const handleClick = (values) => {
@@ -109,12 +107,7 @@ export const RegisterForm = (props) => {
               onBlur={handleBlur}
               value={values.pais}
             >
-              {[
-                { value: 'Colombia', id: 'colombia' },
-                // { value: 'Ecuador', id: 'ecuador' },
-                // { value: 'Peru', id: 'peru' },
-                // { value: 'Venezuela', id: 'venezuela' },
-              ]}
+              {[{ value: 'Colombia', id: 'colombia' }]}
             </FormDropdown>
             <FormDropdown
               labeltag="Ciudad"
@@ -124,14 +117,9 @@ export const RegisterForm = (props) => {
               onBlur={handleBlur}
               value={values.ciudad}
             >
-              {[
-                { value: 'Bogota', id: 'bogota' },
-                // { value: 'Cali', id: 'cali' },
-                // { value: 'Barranquilla', id: 'barranquilla' },
-                // { value: 'Medellin', id: 'medellin' },
-              ]}
+              {[{ value: 'Bogota', id: 'bogota' }]}
             </FormDropdown>
-            <FormButton>Registrarme ></FormButton>
+            <FormButton isLoading={isLoading}>Registrarme</FormButton>
           </div>
         </form>
       )}

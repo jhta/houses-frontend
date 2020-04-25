@@ -4,7 +4,7 @@ import { Row, Column } from '../grid';
 
 export const FormBottom = ({
   back: { action: backAction, label: backLabel, show: showBackButton },
-  next: { action: nextAction, label: nextLabel, disable: nextDisable },
+  next: { action: nextAction, label: nextLabel, disable: nextDisable, loading },
 }) => (
   <React.Fragment>
     <hr className="w-full border mt-6 mb-2 border-gray-3" />
@@ -23,7 +23,7 @@ export const FormBottom = ({
         ) : null}
       </Column>
       <Column className="w-1/2 items-end">
-        <FormButton action={nextAction} disable={nextDisable}>
+        <FormButton action={nextAction} disable={nextDisable} loading={loading}>
           {nextLabel}
         </FormButton>
       </Column>

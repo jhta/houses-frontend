@@ -7,9 +7,9 @@ export const Header = ({ isAuth }) => (
     <Container>
       <Row className="justify-between">
         <Column>
-          <div className="flex justify-center items-center text-center">
+          <div className="flex h-full justify-center items-center text-center">
             <a href="/">
-              <img className="h-6" src="/images/logo.svg" />
+              <img className="h-8 my-2" src="/images/logo.svg" />
             </a>
             <MapSearchBarIfNeeded show={isAuth} />
           </div>
