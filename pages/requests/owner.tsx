@@ -1,9 +1,12 @@
 import React from 'react';
+import { isEmpty } from 'lodash';
 import { asPage } from '../../utils';
-import { Banner, HomeSection, Table } from '../../components/organisms';
+import { Table } from '../../components/organisms';
 import { Layout } from '../../components/layout';
 import { Container, Row, Column } from '../../components/grid';
 import { H1 } from '../../components/atoms';
+
+import { getOwnerRequests } from '../../services/apis/requests';
 
 const tableHeaders = ['Nombre', 'Fecha de solicitud', 'Desde/Hasta', 'Estado', 'Detalle'];
 
@@ -16,7 +19,7 @@ const rows = [
     { label: 'Detalle', link: '#' },
   ],
 ];
-const Home = ({ authorization }) => (
+const OwnerRequestsPage = ({ authorization, requests = [] }) => (
   <div>
     <Layout isAuth={Boolean(authorization)}>
       <Container className="my-12">
@@ -38,9 +41,20 @@ const Home = ({ authorization }) => (
   </div>
 );
 
-// Home.getInitialProps = async ({ req }) => {
-//   const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
-//   return { userAgent };
-// };
+OwnerRequestsPage.getInitialProps = async ({ req, authorization }) => {
+  try {
+    const {
+      data: { requests },
+      error,
+    } = await getOwnerRequests({ UserId: 1 }, authorization);
+    if (!isEmpty(error)) {
+      throw new Error(error);
+    }
 
-export default asPage(Home);
+    return { requests, authorization };
+  } catch (e) {
+    return { error: e.toString() };
+  }
+};
+
+export default asPage(OwnerRequestsPage);

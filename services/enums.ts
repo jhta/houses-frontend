@@ -3,4 +3,6 @@ export enum Endpoint {
   'Locations' = '/location',
   'places' = '/places',
   'users' = '/users',
+  'ownerRequests' = '/requests/get-all-by-ownerid',
+  'allRequests' = '/requests/get-all-by-requesterid',
 }
