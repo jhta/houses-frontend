@@ -48,11 +48,11 @@ export const LoginForm = (props) => {
         setLoader(true);
         setErrors([]);
         try {
-          setLoader(false);
           const { data, error } = await login({ username, password });
           if (data.ok) window.location.href = '/';
 
           if (error) setErrors([error]);
+          setLoader(false);
         } catch (error) {
           setLoader(false);
           setErrors([error.message]);
