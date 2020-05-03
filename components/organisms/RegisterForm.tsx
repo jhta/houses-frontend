@@ -1,32 +1,14 @@
 import React, { useState } from 'react';
-import classnames from 'classnames';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { Spinner } from '../atoms';
+
 import { FormDropdown, FormInput } from '../molecules';
+import { FormButton } from '../molecules/session';
 import { postUser } from '../../services/apis/user';
 import { login } from '../../services/oauth';
 
 const { string, object } = yup;
 
-const FormButton = (props) => {
-  const { children, disable, isLoading } = props;
-  return (
-    <label className="block">
-      <button
-        disabled={disable}
-        className={classnames(
-          'form-input mt-4 block font-bold text-base w-full rounded',
-          { 'bg-gray-5 text-textColor cursor-not-allowed': disable },
-          { 'bg-primary text-white': !disable }
-        )}
-        type="submit"
-      >
-        {isLoading ? <Spinner /> : children}
-      </button>
-    </label>
-  );
-};
 export const RegisterForm = (props) => {
   const validationSchema = object().shape({
     name: string().required('* El nombre es requerido'),

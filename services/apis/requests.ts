@@ -26,7 +26,10 @@ export interface IGetOwnerRequestResponse extends RequestResponse {
   };
 }
 
-export async function getOwnerRequests(params: IOwnerRequestParams, authorization): Promise<IGetOwnerRequestResponse> {
+export async function getOwnerRequests(
+  params: IOwnerRequestParams,
+  authorization: string
+): Promise<IGetOwnerRequestResponse> {
   const formattedParams = qs.stringify(params);
 
   const options: AxiosRequestConfig = {
@@ -47,7 +50,10 @@ export async function getOwnerRequests(params: IOwnerRequestParams, authorizatio
   }
 }
 
-export async function getAllRequests(params: IOwnerRequestParams, authorization): Promise<IGetOwnerRequestResponse> {
+export async function getAllRequests(
+  params: IOwnerRequestParams,
+  authorization: string
+): Promise<IGetOwnerRequestResponse> {
   const formattedParams = qs.stringify(params);
 
   const options: AxiosRequestConfig = {

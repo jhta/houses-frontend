@@ -1,31 +1,12 @@
 import React, { useState } from 'react';
 import Router from 'next/router';
 import { Formik } from 'formik';
-import classnames from 'classnames';
 import { string, object } from 'yup';
 
 import { FormInput } from '../molecules';
-import { Alert, Spinner } from '../atoms';
+import { FormButton } from '../molecules/session';
+import { Alert } from '../atoms';
 import { login } from '../../services/oauth';
-
-const FormButton = (props) => {
-  const { children, disable, isLoading } = props;
-  return (
-    <label className="block">
-      <button
-        disabled={disable}
-        className={classnames(
-          'form-input mt-4 block font-bold text-base w-full rounded',
-          { 'bg-gray-5 text-textColor cursor-not-allowed': disable },
-          { 'bg-primary text-white': !disable }
-        )}
-        type="submit"
-      >
-        {isLoading ? <Spinner /> : children}
-      </button>
-    </label>
-  );
-};
 
 export const LoginForm = (props) => {
   const validationSchema = object().shape({
