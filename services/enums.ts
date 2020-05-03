@@ -5,4 +5,5 @@ export enum Endpoint {
   'users' = '/users',
   'ownerRequests' = '/requests/get-all-by-ownerid',
   'allRequests' = '/requests/get-all-by-requesterid',
+  'current' = '/auth/current',
 }

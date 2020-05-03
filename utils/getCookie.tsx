@@ -1,4 +1,4 @@
-export function parseCookies(request) {
+export function parseCookies(request): { [key: string]: string } {
   const list = {},
     rc = request.headers.cookie;
 
@@ -11,7 +11,12 @@ export function parseCookies(request) {
   return list;
 }
 
-export function getTokenFromRequest(req) {
+export function getCookie(req, cookieName: string): string {
+  const cookies = parseCookies(req);
+  return cookies[cookieName];
+}
+
+export function getTokenFromRequest(req): string {
   const cookies = parseCookies(req);
   return cookies['token'];
 }

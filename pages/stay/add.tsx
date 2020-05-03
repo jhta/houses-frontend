@@ -7,7 +7,6 @@ import { Container, Column, Row } from '../../components/grid';
 import { FormBottom } from '../../components/molecules';
 import { FormFirstPart, FormSecondPart, FormThirdPart } from '../../components/organisms/stay/add';
 import { postPlace, IPostPlaceResponse, IPostParams } from '../../services/apis/places';
-import { getTokenFromRequest } from '../../utils/getCookie';
 import { asPage } from '../../utils/asPage';
 
 enum SUBMIT_BUTTON_LABELS {

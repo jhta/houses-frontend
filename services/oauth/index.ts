@@ -5,6 +5,7 @@ import cookies from 'js-cookie';
 import { API_URL } from '../constants';
 import { RequestResponse } from '../interfaces';
 import { Endpoint } from '../enums';
+import { getCurrentSession, ICurrentSession } from './current';
 
 // const isBrowser = typeof window !== 'undefined';
 
@@ -38,6 +39,9 @@ export async function login(params: LoginParams): Promise<LoginResponse> {
     const { data } = await axios(options);
     const { access_token: token, expires_in: expires } = data;
     cookies.set('token', token, { expires });
+
+    await getCurrentSession(token);
+
     return { data: { ok: true }, error: {} };
   } catch (error) {
     const desc = get(error, 'response.data.error_description', 'server error');

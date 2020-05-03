@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Column } from '../grid';
 import { HeaderLinks } from '../molecules';
 
-export const Header = ({ isAuth }) => (
+export const Header = ({ isAuth, name = '' }) => (
   <header className="border-b border-gray-6">
     <Container>
       <Row className="justify-between">
@@ -14,7 +14,7 @@ export const Header = ({ isAuth }) => (
             <MapSearchBarIfNeeded show={isAuth} />
           </div>
         </Column>
-        <HeaderLinks isAuth={isAuth}></HeaderLinks>
+        <HeaderLinks isAuth={isAuth} name={name}></HeaderLinks>
       </Row>
     </Container>
   </header>
