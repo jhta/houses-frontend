@@ -3,7 +3,7 @@ import { Container, Row, Column } from '../grid';
 import { H1 } from '../atoms';
 import { BannerCard } from '../molecules';
 
-export const Banner = () => (
+export const Banner = ({ isAuth = true }) => (
   <section className="mb-12">
     <Container className="flex flex-col items-center py-6">
       <Row>
@@ -20,7 +20,7 @@ export const Banner = () => (
         </Column>
       </Row>
       <Row className="flex-wrap justify-center">
-        <a className="cursor-pointer" href="/session/login">
+        <a className="cursor-pointer" href={isAuth ? '/stay/add' : '/session/login'}>
           <Column className="w-full md:w-auto md:pr-8 mb-6 items-center">
             <BannerCard
               imgSrc="/images/img-hospedar.png"
