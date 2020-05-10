@@ -82,23 +82,23 @@ const MapPage = ({ places }) => {
           </div>
         </div>
 
-        {mockMark &&
-          mockMark.map((marker) => (
+        {places &&
+          places.map((hospedaje) => (
             <MarkerItem
-              key={marker.key}
-              longitude={marker.coord.longitude}
-              latitude={marker.coord.latitude}
+              key={hospedaje.id}
+              longitude={hospedaje.longitude}
+              latitude={hospedaje.latitude}
               offsetLeft={-20}
               offsetTop={-10}
               onClick={(e) => {
                 e.preventDefault();
-                handleClick(marker);
+                handleClick(hospedaje);
               }}
             />
           ))}
         {selectedMarker && (
           <MarketWindow
-            marker={selectedMarker}
+            hospedaje={selectedMarker}
             closeOnClick={false}
             onClose={() => {
               setSelectedMarket(null);
